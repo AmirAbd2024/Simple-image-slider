@@ -1,0 +1,82 @@
+﻿<html>
+<head>
+
+<style>
+.slideimage{width:400px;height:400px;}
+.slideimagebox{display:inline-flex;transition:0.8s;}
+.slidebtn{transition:0.8s;font-size:18px;cursor:pointer;border:2px solid #FF0000;z-index:1002;position:relative;border-radius:50%;background-color:white;width:20px;height:20px;}
+</style>
+
+
+<script>
+
+var slidecnt=0;
+
+function slideleft(obj){
+var els=document.getElementsByClassName("slideimagebox");
+var btns=document.getElementsByClassName("slidebtn");
+if(slidecnt<els.length-1){btns[1].style.opacity="1";els[0].style.marginLeft=(-1*els[0].offsetWidth*(++slidecnt))+"px";}
+if(slidecnt>=els.length-1){obj.style.opacity="0";}
+}
+
+function slideright(obj){
+var els=document.getElementsByClassName("slideimagebox");
+var btns=document.getElementsByClassName("slidebtn");
+if(slidecnt>0){btns[0].style.opacity="1";els[0].style.marginLeft=(-1*els[0].offsetWidth*(--slidecnt))+"px";}
+if(slidecnt<=0){obj.style.opacity="0";}
+}
+
+function adjustslide(perwid){
+var btns=document.getElementsByClassName("slidebtn");
+btns[1].style.opacity="0";
+var inw = window.innerWidth;
+var imgels=document.getElementsByClassName("slideimage");
+var slidehold=document.getElementById("slideholderid");
+slidehold.style.width=(perwid*inw/100)+"px";
+slidehold.style.height=(perwid*inw/100)+"px";
+for(var a=0;a<imgels.length;a++){
+imgels[a].style.width=slidehold.offsetWidth+"px";
+imgels[a].style.height=slidehold.offsetHeight+"px";
+}
+}
+
+function startonload(){
+adjustslide(40);
+}
+
+</script>
+
+</head>
+
+<body onload="startonload();">
+
+<table><tr>
+
+<td><div align="center" class="slidebtn" style="left:34px;" onclick="slideleft(this);">&lt;</div></td>
+
+<td><div id="slideholderid" style="overflow:hidden;width:200px;height:200px;clear:both;display:inline-flex;">
+
+<div class="slideimagebox"><img src="3.jpg" class="slideimage"/></div>
+<div class="slideimagebox"><img src="4.jpg" class="slideimage"/></div>
+<div class="slideimagebox"><img src="5.jpg" class="slideimage"/></div>
+<div class="slideimagebox"><img src="2.jpg" class="slideimage"/></div>
+
+</div></td>
+
+<td><div align="center" class="slidebtn" style="right:35px;" onclick="slideright(this);">&gt;</div></td>
+
+</tr></table>
+
+<div>use function adjustslide(width percentage); in body onload</div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
